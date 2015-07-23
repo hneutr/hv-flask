@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Years | hunter (verb)
+{% endblock title %}
+
+{% block intro %}
+<h1><a href="{{ url_for("years") }}">Years</a></h1>
+{% endblock intro %}
+
+{% block content %}
+    <div id="page-body">
+        {% for year in years %}
+            <p><a href="{{ url_for('year', year=year) }}">{{ year }}</a></p>
+        {% endfor %}
+    </div>
+{% endblock content %}

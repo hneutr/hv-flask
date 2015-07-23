@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block title %}resume | hunter (verb){% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='resume.css') }}"/>
+{% endblock style %}
+
+{% block intro %}
+<h1>Kenneth Hunter Wapman</h1>
+<hr>
+<h3><a href="mailto:hunter.wapman@gmail.com">hunter.wapman@gmail.com</a></h3>
+<h3><a href="{{ url_for('index') }}">hunter-.github.io</a></h3>
+{% endblock intro %}
+
+{% block content %}
+<div id="page-body">
+    <div class="resume-block">
+        <h3 class="resume-block-title">Education:</h3>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Tufts University, College of Arts and Sciences</h4>
+            <p class="resume-item-description">Bachelor of Science in Computer Science</p>
+            <p class="resume-item-where">Medford, MA</p>
+            <p class="resume-item-when">May 2015</p>
+            <p><span class="resume-item-key">Honors:</span> Summa Cum Laude, Phi Beta Kappa, Dean's List (7 Semesters)</p>
+            <p><span class="resume-item-key">Relevant Coursework:</span> Internet-scale Distributed Systems, Introduction to Machine Learning, Web Programming, Machine Structure and Assembly Programming, Senior Capstone I and II, Computation Theory, Data Structures, Programming Languages, Human Computer Interaction, Discrete Mathematics, Logic, Perception, Principles of Tonal Theory I and III</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Stanford University, School of Engineering
+            </h4>
+            <p class="resume-item-description">Summer Computer Science Student</p>
+            <p class="resume-item-where">Palo Alto, CA</p>
+            <p class="resume-item-when">Summer 2013</p>
+            <p><span class="resume-item-key">Relevant Coursework:</span> Design and Analysis of Algorithms</p>
+        </div>
+    </div>
+    <div class="resume-block ">
+        <h3 class="resume-block-title">Experience:</h3>
+        <div class="resume-item">
+            <h4 class="resume-item-title">athenahealth
+            </h4>
+            <p class="resume-item-description">Software Developer</p>
+            <p class="resume-item-where">Boston, MA</p>
+            <p class="resume-item-when">August 2015 - Present</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Tufts University</h4>
+            <p class="resume-item-description">Independent Researcher exploring Music Complexity</p>
+            <p class="resume-item-where">Medford, MA</p>
+            <p class="resume-item-when">Summer 2014</p>
+            <ul class="resume-item-list">
+                <li>Independently worked on a computational approach for analyzing Music Complexity with Professor Anselm Blumer, Tufts University</li>
+                <li>Explored current approaches in Artificial Intelligence, Psychology, Music Theory and Digital Signal Processing</li>
+                <li>Learned and used the EchoNest API to extract tonal and metrical information from digital sources</li>
+                <li>Designed algorithms to identify musical lines in symbolic music in the MusicXML format</li>
+            </ul>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Kennet Partners
+            </h4>
+            <p class="resume-item-description">Data Analyst</p>
+            <p class="resume-item-where">San Mateo, CA</p>
+            <p class="resume-item-when">Summer 2011</p>
+            <ul class="resume-item-list">
+                <li>Researched companies in Healthcare, Information Technology, and Software-as-a-Service for investment potential</li>
+                <li>Created presentations on vetted companies summarizing their product, growth, strategy, strengths, and weaknesses</li>
+                <li>Participated in company meetings to discuss viable investment opportunities</li>
+            </ul>
+        </div>
+    </div>
+    <div class="resume-block ">
+        <h3 class="resume-block-title">Projects:</h3>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Capstone Project: Device-Agnostic Indoor Positing for Mobile Phones
+            </h4>
+            <p class="resume-item-where">Medford, MA</p>
+            <p class="resume-item-when">Fall 2014 - Spring 2015</p>
+            <ul class="resume-item-list">
+                <li>Collaborated with a team of three other students to develop a Wi-Fi Fingerprint-based indoor positioning system</li>
+                <li>Wrote original paper on the research conducted published in IEEE Xplore.</li>
+                </li>
+                <li>Presented at: IEEE 26th International Symposium on Personal, Indoor, and Mobile Radio Communications (PIMRC); Tufts University Undergraduate Research & Scholarship Symposium; New England Undergraduate Computing Symposium</li>
+                <li>Designed a novel distance metrics for the KNN Machine Learning algorithm</li>
+                <li>Created an Android App using Facebook Logins to share location data with friends</li>
+                <li>Implemented a Django server and PostgreSQL database to interface with mapping code and Android application</li>
+            </ul>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Personal Website</h4>
+            <p class="resume-item-when">Summer 2014 - Present</p>
+            <ul class="resume-item-list">
+                <li>Personal blogging website built using Flask, Flat-Pages, and Frozen-Flask to house coding projects, thoughts, and playlists.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="resume-block ">
+        <h3 class="resume-block-title">Skills</h3>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Programming Languages</h4>
+            <p>C, C++, Python, Javascript</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Frameworks/Libraries/Databases</h4>
+            <p>Flask, React,Node.js, Jekyll, MongoDB</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Markup/Styling:</h4>
+            <p>HTML, CSS</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Other (Tools and APIs):</h4>
+            <p>git, GitHub, EchoNest, Weka, Heroku</p>
+        </div>
+    </div>
+    <div class="resume-block ">
+        <h3 class="resume-block-title">Activities: </h3>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Piano</h4>
+            <p>Classical, 2011 - Present</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Races</h4>
+            <p>San Francisco Half Marathon - Summer 2014 and Summer 2015</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Black Belt</h4>
+            <p>Golden State Tae Kwon Do - 2011</p>
+        </div>
+        <div class="resume-item">
+            <h4 class="resume-item-title">Community Service</h4>
+            <p>Kedougou, Senegal - Summer 2006; Darjeeling, India - Summer 2007</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

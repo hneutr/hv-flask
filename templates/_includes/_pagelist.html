@@ -1,0 +1,16 @@
+{% for page in pages %}
+    <div class="stub">
+    {% if loop.first %}
+        {% with page=page, content=True %}
+            {% include "_includes/_pageintro.html" %}
+        {% endwith %}
+    {% else %}
+        {% with page=page %}
+            {% include "_includes/_pageintro.html" %}
+        {% endwith %}
+    {% endif %}
+    </div>
+    {% if not loop.last %}
+    <p class="spacer"></p>
+    {% endif %}
+{% endfor %}

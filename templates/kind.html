@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% from '_macros/paginate.html' import paginate with context %}
+
+{% block title %}
+    {{ kind }} | hunter (verb)
+{% endblock title %}
+
+{% block intro %}
+<h1><a href="{{ url_for("kind", kind=kind) }}">{{ kind }}</a></h1>
+{% endblock intro %}
+
+{% block content %}
+    {% with pages=pages, nokind=True %}
+        {% include "_includes/_pagelist.html" %}
+    {% endwith %}
+
+    {{ paginate(pagination) }}    
+{% endblock content %}

@@ -1,0 +1,48 @@
+div.resume-block {
+    margin-bottom: 1.5rem;
+}
+div#page-body div.resume-block:last-child {
+    margin-bottom: 0;
+}
+
+h3.resume-block-title {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+div.resume-item {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+div.resume-block div.resume-item:last-child {
+    margin-bottom: 0;
+}
+
+h4.resume-item-title {
+    margin: 0 auto;
+    font-size: 1rem;
+    font-weight: 300;
+    text-decoration: underline;
+
+}
+.resume-item p,
+.resume-item li {
+    margin: 0 auto;
+    font-size: .8rem;
+}
+p.resume-item-description {
+    font-style: italic;
+    font-weight: 500;
+}
+p.resume-item-when {
+    margin-bottom: .5rem;
+}
+span.resume-item-key {
+    font-weight: 500;
+
+}
+ul.resume-item-list {
+    margin-top: 0;
+    padding-left: 1rem;
+}

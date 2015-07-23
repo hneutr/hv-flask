@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from '_macros/paginate.html' import paginate with context %}
+
+{% block title %}hunter (verb){% endblock title %}
+
+{% block intro %}
+    <h1>I'm Hunter.</h1>
+    <hr>
+    <h3>I like doing things</h3>
+    <h3>and to be doing.</h3>
+{% endblock intro %}
+
+{% block content %}
+    {% with pages=pages  %}
+        {% include "_includes/_pagelist.html" %}
+    {% endwith %}
+    {{ paginate(pagination) }}
+{% endblock content %}

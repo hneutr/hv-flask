@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Tags | hunter (verb)
+{% endblock title %}
+
+{% block intro %}
+<h1><a href="{{ url_for("tags") }}">Tags</a></h1>
+{% endblock intro %}
+
+{% block content %}
+    <div id="page-body">
+        {% for tag in tags %}
+            <p><a href="{{ url_for('tag', tag=tag) }}">{{ tag }}</a></p>
+        {% endfor %}
+    </div>
+{% endblock content %}

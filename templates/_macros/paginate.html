@@ -1,0 +1,19 @@
+{% macro paginate(pagination) %}
+    {% if pagination.pages > 1 %}
+        <div id="pagination" 
+            {% if pagination.has_prev and pagination.has_next %}
+                class="flex-row middle"
+            {% elif not pagination.has_prev and pagination.has_next %}
+                class="flex-row right"
+            {% else %} 
+                class="flex-row left"
+            {% endif %}>
+            {% if pagination.has_prev %}
+            <div class="left"><a href="{{ url_for_other_page(pagination.page - 1) }}">Newer</a></div>
+            {% endif %}
+            {% if pagination.has_next %}
+            <div class="right"><a href="{{ url_for_other_page(pagination.page + 1) }}">Older</a></div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endmacro %}

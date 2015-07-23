@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from '_macros/paginate.html' import paginate with context %}
+
+{% block title %}
+    {{ tag }} | hunter (verb)
+{% endblock title %}
+
+{% block intro %}
+<h1>Tagged: <a href="{{ url_for("tag", tag=tag) }}">{{ tag }}</a></h1>
+{% endblock intro %}
+
+{% block content %}
+    {% with pages=pages  %}
+        {% include "_includes/_pagelist.html" %}
+    {% endwith %}
+    {{ paginate(pagination) }}
+{% endblock content %}

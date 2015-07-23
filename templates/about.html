@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}me | hunter (verb){% endblock title %}
+
+{% block intro %}
+<h1>I'm Hunter.</h1>
+<hr>
+<h3>I like doing things</h3>
+<h3>and to be doing.</h3>
+{% endblock intro %}
+
+{% block content %}
+<div id="page-body">
+    <p>Hello! The header doesn't lie - I'm Hunter Wapman. </p>
+    <p>For me, happiness is a verb, to be found in doing, not in being. I'm happiest when I'm engaged, working toward a goal, solving a problem, improving - myself or my surroundings.</p>
+    <p>I graduated in 2015 from Tufts University with a degree in Computer Science. I dig complexity theory, machine learning, algorithms, and systems design. There's nothing more satisfying than learning about the way things work.</p>
+    <p>Brought up on Legos, I have a soft spot for the discrete, and love things I can count or otherwise break down into pieces. I'm a consumate structuralist, and am constantly trying to figure out the best way to store information and things.</p>
+    <p>I like to spend my time listening to music (space disco, rock), reading (literature, philosophy), exercising (running, swimming, jumprope, rowing), and playing classical piano (particularly Bach).</p>
+    <p>If you're so inclined, you can email me at <a href="mailto:hunter.wapman@gmail.com">hunter.wapman@gmail.com</a>, check out my github at <a href="https://github.com/hunter-">github.com/hunter-</a>, or find my resume <a href="{{ url_for('resume')}}">here</a>.</p>
+</div>
+{% endblock content %}
