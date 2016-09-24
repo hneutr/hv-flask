@@ -120,6 +120,10 @@ def me():
 def resume():
     return render_template('resume.html')
 
+@app.route('/semanticweb.html')
+def semanticweb():
+    return render_template('semantic_web.html')
+
 @app.route('/404.html')
 def notfound():
     return render_template('404.html')
