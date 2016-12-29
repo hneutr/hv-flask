@@ -25,6 +25,9 @@
                 {% with url=url_for('kind', kind='Playlists'), text='Playlists' %}
                     {% include "_includes/_navlink.html" %}
                 {% endwith %}
+                {% with url=url_for('kind', kind='Written'), text='Written' %}
+                    {% include "_includes/_navlink.html" %}
+                {% endwith %}
             </div>
             <hr>
             <div id="meta" class="flex-column">

@@ -12,11 +12,13 @@ FREEZER_DESTINATION_IGNORE = ['.git*']
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.url_map.strict_slashes = False
 pages = FlatPages(app)
 freezer = Freezer(app)
 
 ###############################################################################
-
+# Pagination
+###############################################################################
 class Pagination(object):
     def __init__(self, page, per_page, total_count):
         self.page = page
@@ -36,7 +38,8 @@ class Pagination(object):
         return self.page < self.pages
 
 ###############################################################################
-
+# Index
+###############################################################################
 @app.route('/', defaults={'page':1})
 @app.route('/page/<int:page>.html')
 def index(page):
@@ -51,6 +54,9 @@ def index(page):
 
     return render_template('index.html', pages=this_page, pagination=pagination)
 
+###############################################################################
+# 'Simple' Routes
+###############################################################################
 @app.route('/<path:path>/')
 def page(path):
     page = pages.get_or_404(path)
@@ -99,7 +105,8 @@ def year(year, page):
     return render_template('year.html', pages=this_page, year=year, pagination=pagination)
 
 ###############################################################################
-
+# Dynamic Routes
+###############################################################################
 @app.route('/tags.html')
 def tags():
     all_tags = [p.meta.get('tags', []) for p in pages if p.meta.get('tags', [])]
@@ -112,6 +119,9 @@ def years():
     flattened = sorted(set(all_years), reverse=True)
     return render_template('years.html', years=flattened)
 
+###############################################################################
+# Static Routes
+###############################################################################
 @app.route('/me.html')
 def me():
     return render_template('about.html')
@@ -124,10 +134,16 @@ def resume():
 def semanticweb():
     return render_template('semantic_web.html')
 
+@app.route('/fogimage.html')
+def fogimage():
+    return render_template('fogimage.html')
+
 @app.route('/404.html')
 def notfound():
     return render_template('404.html')
 
+###############################################################################
+# Filters/Miscellaneous
 ###############################################################################
 @app.template_filter()
 def formatdate(value, format='%Y/%m/%d'):
@@ -152,8 +168,12 @@ app.jinja_env.filters['excerpt'] = excerpt
 app.jinja_env.globals['short'] = short
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 
+###############################################################################
+# Run
+###############################################################################
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == "build":
             freezer.freeze()
     else:
         app.run(port=8000)
+
