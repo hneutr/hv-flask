@@ -21,9 +21,22 @@ html, body {
     flex-direction: row;
     -webkit-box-orient: horizontal;
 }
-.contrast {
-    background: #e4e4e4;
-    border: 1px solid #d1d1d1;
+
+/******************                Variables                ********************/
+:root {
+	--nav-wrapper-order: 1;
+	--content-wrapper-order: 2;
+	--content-margin: 3rem;
+	--blurb-width: 60%;
+}
+
+@media (max-width: 800px) {
+	:root {
+		--nav-wrapper-order: 2;
+		--content-wrapper-order: 1;
+		--content-margin: 1.5rem;
+		--blurb-width: 80%;
+	}
 }
 
 /******************                Desktop                ********************/
@@ -33,14 +46,12 @@ html, body {
         -webkit-box-orient: horizontal;
         justify-content: center;
         -webkit-box-pack: center;
+		margin-top: 2rem;
     }
     #nav {
-        order: 1;
         align-items: flex-end;
         -webkit-box-align: end;
-        width: 100px;
-        margin-top: 2.5rem;
-        margin-right: .5rem;
+		width: 0;
     }
     #nav hr {
         margin: .25rem 0;
@@ -49,14 +60,11 @@ html, body {
         text-align: right;
     }
     #content-wrapper {
-        order: 2;
-        margin-top: 2rem;
         width: 600px;
-        margin-bottom: 2rem;
     }
     #kinds, 
     #about,
-    #meta {
+    #metas {
         align-items: flex-end;
         -webkit-box-align: end;
     }
@@ -64,13 +72,10 @@ html, body {
         margin: 0;
         float: right;
     }
-    #page-intro, 
-    .stub, 
-    #page-body,
-    #pagination div {
-        margin: 1.5rem;
-        padding: 1.5rem;
-    }
+	#third-wrapper {
+		order: 3;
+		flex-grow: 1;
+	}
 }
 
 /******************                 Mobile                ********************/
@@ -83,23 +88,17 @@ html, body {
         -webkit-box-orient: vertical;
         -webkit-box-direction: reverse;
     }
+	#third-wrapper {
+		display: none;
+	}
     #nav {
-        order: 2;
         -webkit-box-direction: normal;
         align-items: center;
         -webkit-box-align: center;
         margin: 1.5rem auto;
     }
     #content-wrapper {
-        order: 1;
         -webkit-box-direction: normal;
-    }
-    #page-intro, 
-    .stub, 
-    #page-body,
-    #pagination div {
-        margin: .75rem;
-        padding: 1rem;
     }
     .navlink a {
         display: block;
@@ -118,38 +117,52 @@ html, body {
     display: -ms-flexbox; 
     display: flex;
 }
-#page-intro, 
-.stub, 
-#page-body,
-#pagination div {
-    background: #ffffff;
-    border: 1px solid #d1d1d1;
+#content-wrapper {
+	order: var(--content-wrapper-order);
 }
-#page-intro, .stub {
-    text-align: center;
+#nav-wrapper {
+	flex-direction: row-reverse;
+	-webkit-flex-direction: row-reverse;
+	order: var(--nav-wrapper-order);
+	flex-grow: 1;
 }
-#pagination.middle {
+#pagination {
     justify-content: space-between;
     -webkit-box-pack: justify;
 }
-#pagination.right {
-    justify-content: flex-end;
-    float: right;
-}
-#pagination.left {
-    justify-content: flex-start;
-    float: left;
-}
-#pagination div {
+div #pagination {
     padding: 1rem;
-    margin-top: 0;
+	margin: 2rem 1rem 1rem 1rem;
 }
 .page-content {
     text-align: left;
 }
 
+/* testing pagination stuff*/
+/* need to add in safari code */
+#pagination {
+	justify-content: center;
+}
+#pagination-separator {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	flex-grow: 0;
+	flex-basis: 10%;
+}
+#pagination div.left {
+	text-align: right;
+	flex-grow: 1;
+	flex-basis: 45%;
+}
+#pagination div.right {
+	flex-grow: 1;
+	flex-basis: 45%;
+}
+
 /******************             Nav and Header                ****************/
 #header {
+	margin-top: .5rem;
     margin-bottom: 1.5rem;
 }
 #header p {
@@ -171,6 +184,7 @@ html, body {
     font-size: 1rem;
     font-weight: 100;
 }
+
 #nav hr {
     width: 4rem;
 }
@@ -183,39 +197,89 @@ html, body {
     font-size: .85rem;
 }
 
-/******************                Elements                *******************/
-#page-intro h1,
-#page-intro h3,
-.stub h2 {
-    margin: 0;    
+#content {
+	margin: var(--content-margin);
 }
-#page-intro h1,
-.stub h2 {
-    font-weight: 300;
-    font-size: 1.5rem;
+
+/******************                Elements                *******************/
+#page-intro {
+	text-align: center;
+	padding: 1.5rem 0 1.5rem 0;
+}
+#page-intro h1 {
+	font-size: 2.5rem;
+	font-weight: 200;
+	margin: 1.5rem var(--content-margin);
 }
 #page-intro h3 {
+	margin: 0;
     font-weight: 200;
     font-size: 1rem;
+	margin-bottom: 1.5rem;
 }
 
 hr {
     width: 40%;
     margin: 2rem auto;
 }
-#page-intro hr,
+hr.stubspacer {
+	width: 40%;
+	margin: 3rem auto;
+}
+
+#header-body-split hr.small {
+	width: 1rem;
+	margin: 0 auto;
+}
+#header-body-split hr.large {
+	width: 3rem;
+	margin: .5rem auto;
+}
+.stub {
+	text-align: center;
+}
 .stub hr {
     width: 3rem;
     margin: 1rem auto;
 }
+.stub h2 {
+    margin: 0;    
+    font-weight: 300;
+    font-size: 1.5rem;
+}
 
-.meta p {
+.blurb {
+	width: var(--blurb-width);
+	margin: 1.5rem auto 0 auto;
+}
+.blurb p {
     margin: 0;
     font-size: .8rem;
 }
+.blurb div.info {
+	order: 1;
+	justify-content: space-between;
+}
+.blurb div.info div.context {
+	flex-grow: 2;
+}
+.blurb div.info div.context p {
+	text-align: left;
+	margin: 0;
+}
+.blurb div.description {
+	order: 3;
+	margin-top: 1.5rem;
+}
+
 p.spacer {
     margin: 0;
     margin-top: 1.5rem;
+}
+
+#page-body p {
+	margin: 0 auto;
+	text-indent: 2.5rem;
 }
 #page-body p:first-child {
     margin-top: 0;
@@ -256,4 +320,22 @@ a#header,
 img {
     max-width: 100%;
     max-height: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+ul > li {
+  text-indent: -.5rem;
+}
+ul > li:before {
+  content: "–";
+  text-indent: -.5rem;
+  margin-right: .5rem;
+}
+
+#page-body.word-list > p {
+	text-align: center;
+	margin: 1rem 0;
+	text-indent: 0;
 }

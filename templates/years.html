@@ -9,7 +9,7 @@
 {% endblock intro %}
 
 {% block content %}
-    <div id="page-body">
+    <div id="page-body" class="word-list">
         {% for year in years %}
             <p><a href="{{ url_for('year', year=year) }}">{{ year }}</a></p>
         {% endfor %}

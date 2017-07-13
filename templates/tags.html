@@ -9,7 +9,7 @@
 {% endblock intro %}
 
 {% block content %}
-    <div id="page-body">
+    <div id="page-body" class="word-list">
         {% for tag in tags %}
             <p><a href="{{ url_for('tag', tag=tag) }}">{{ tag }}</a></p>
         {% endfor %}

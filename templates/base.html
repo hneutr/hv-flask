@@ -9,59 +9,61 @@
 </head>
 <body>
     <div id="main">
-        <div id="nav" class="flex-column">
-            <a id="header" href="{{ url_for("index") }}">
-                <p class="title">hunter</p>
-                <p class="subtitle">(<span>verb</span>)</p>
-            </a>
-            <hr>
-            <div id="kinds" class="flex-column">
-                {% with url=url_for('kind', kind='Thoughts'), text='Thoughts' %}
-                    {% include "_includes/_navlink.html" %}
-                {% endwith %}
-                {% with url=url_for('kind', kind='Projects'), text='Projects' %}
-                    {% include "_includes/_navlink.html" %}
-                {% endwith %}
-                {% with url=url_for('kind', kind='Playlists'), text='Playlists' %}
-                    {% include "_includes/_navlink.html" %}
-                {% endwith %}
-                {% with url=url_for('kind', kind='Written'), text='Written' %}
-                    {% include "_includes/_navlink.html" %}
-                {% endwith %}
-            </div>
-            <hr>
-            <div id="meta" class="flex-column">
-                {% with url=url_for('years'), text='Years' %}
-                    {% include "_includes/_navlink.html" %}
-                {% endwith %}            
-                {% with url=url_for('tags'), text='Tags' %}
-                    {% include "_includes/_navlink.html" %}
-                {% endwith %}            
-            </div>
-            <hr>
-            <div id="about" class="flex-column">
-                {% with url=url_for('me'), text='Me' %}
-                    {% include "_includes/_navlink.html" %}
-                {% endwith %}
-            </div>
-        </div>
+		<div id="nav-wrapper" class="flex-column">
+			<div id="nav" class="flex-column">
+				<a id="header" href="{{ url_for("index") }}">
+					<p class="title">hunter</p>
+					<p class="subtitle">(<span>verb</span>)</p>
+				</a>
+				{% block navlinks %}
+				<hr>
+				<div id="kinds" class="flex-column">
+					{% for kind in kinds %}
+						{% with url=url_for('kind', kind=kind), text=kind %}
+							{% include "_includes/_navlink.html" %}
+						{% endwith %}
+					{% endfor %}
+				</div>
+				<hr>
+				<div id="metas" class="flex-column">
+					{% for meta in metas %}
+						{% with url=url_for(meta|lower), text=meta %}
+								{% include "_includes/_navlink.html" %}
+							{% endwith %}
+						{% endfor %}
+				</div>
+				<hr>
+				<div id="about" class="flex-column">
+					{% with url=url_for('me'), text='Me' %}
+						{% include "_includes/_navlink.html" %}
+					{% endwith %}
+				</div>
+				{% endblock navlinks %}
+			</div>
+		</div>
         <div id="content-wrapper" class="flex-column">
-            <div class="contrast">
-                <div id="page-intro">
-                    {% block intro %}
-                    <h1>I'm Hunter.</h1> 
-                    {% endblock intro %}
-                </div>
-            </div>
-            <p class="spacer"></p>
-            <div class="contrast">
-                {% block content %}
-                <div id="page-body">
-                    Niente.
-                </div>
-                {% endblock content %}
-            </div>
+			<div id="page-intro">
+				{% block intro %}
+					<h1>I'm Hunter.</h1>
+					<h3>do and be doing</h3>
+				{% endblock intro %}
+			</div>
+
+			<div id="header-body-split">
+				<hr class="small">
+				<hr class="large">
+				<hr class="small">
+			</div>
+
+			<div id="content">
+				{% block content %}
+				<div id="page-body">
+					Niente.
+				</div>
+				{% endblock content %}
+			</div>
         </div>
+		<div id="third-wrapper"></div>
     </div>
 </body>
 </html>

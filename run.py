@@ -1,24 +1,72 @@
-import sys
-from math import ceil
 from flask import Flask, render_template, redirect, request, url_for
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 
-DEBUG = True
-FLATPAGES_AUTO_RELOAD = DEBUG
+import argparse
+import copy
+import io
+import json
+import markdown
+import math
+import os
+import shutil
+import sys
+import yaml
+
+#-------------------------------------------------------------------------------
+# ARGUMENTPARSING
+#-------------------------------------------------------------------------------
+def get_args():
+    """Defines an argument parser for this script and returns the flags this 
+    package is called with
+    """
+
+    parser = argparse.ArgumentParser(description='my site')
+
+    parser.add_argument(
+        '-b', '--build',
+        help='build flatpages',
+        default=False,
+        action='store_true')
+
+    parser.add_argument(
+        '-d',
+        '--debug',
+        help="print debug messages",
+        default=False,
+        action="store_true")
+
+    args = parser.parse_args()
+
+    return parser.parse_args()
+
+args = get_args()
+
+if args.debug:
+    FREEZER_DESTINATION = 'build_test'
+
+FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
-PER_PAGE = 5
 FREEZER_DESTINATION_IGNORE = ['.git*']
+PER_PAGE = 5
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.url_map.strict_slashes = False
 pages = FlatPages(app)
 freezer = Freezer(app)
 
-###############################################################################
+def load_config():
+    config_path = os.path.join(os.getcwd(), 'config.yaml')
+    with open(config_path) as f:
+        return yaml.load(f)
+
+config = load_config()
+
+#-------------------------------------------------------------------------------
 # Pagination
-###############################################################################
+#-------------------------------------------------------------------------------
 class Pagination(object):
     def __init__(self, page, per_page, total_count):
         self.page = page
@@ -27,7 +75,7 @@ class Pagination(object):
 
     @property
     def pages(self):
-        return int(ceil(self.total_count / float(self.per_page)))
+        return int(math.ceil(self.total_count / float(self.per_page)))
 
     @property
     def has_prev(self):
@@ -37,11 +85,11 @@ class Pagination(object):
     def has_next(self):
         return self.page < self.pages
 
-###############################################################################
+#-------------------------------------------------------------------------------
 # Index
-###############################################################################
+#-------------------------------------------------------------------------------
 @app.route('/', defaults={'page':1})
-@app.route('/page/<int:page>.html')
+@app.route('/<int:page>.html')
 def index(page):
     dated = [p for p in pages if 'date' in p.meta]
 
@@ -54,16 +102,23 @@ def index(page):
 
     return render_template('index.html', pages=this_page, pagination=pagination)
 
-###############################################################################
+#-------------------------------------------------------------------------------
 # 'Simple' Routes
-###############################################################################
+#-------------------------------------------------------------------------------
 @app.route('/<path:path>/')
 def page(path):
     page = pages.get_or_404(path)
+
+    if page.meta.get('independent', False):
+        kind = page.meta.get('kind','')
+        page_url = page.meta.get('url_path','')
+
+        redirect(url_for(kind + '/' + page_url + '.html'))
+
     return render_template('page.html', page=page)
 
 @app.route('/kind/<string:kind>.html', defaults={'page':1})
-@app.route('/kind/<string:kind>/page/<int:page>.html')
+@app.route('/kind/<string:kind>/<int:page>.html')
 def kind(kind, page):
     in_kind = [p for p in pages if kind in p.meta.get('kind', [])]
 
@@ -76,8 +131,8 @@ def kind(kind, page):
 
     return render_template('kind.html', pages=this_page, kind=kind, pagination=pagination)
 
-@app.route('/tag/<string:tag>.html', defaults={'page':1})
-@app.route('/tag/<string:tag>/page/<int:page>.html')
+@app.route('/tagged/<string:tag>.html', defaults={'page':1})
+@app.route('/tagged/<string:tag>/<int:page>.html')
 def tag(tag, page):
     tagged = [p for p in pages if tag in p.meta.get('tags', [])]
 
@@ -91,7 +146,7 @@ def tag(tag, page):
     return render_template('tag.html', pages=this_page, tag=tag, pagination=pagination)
 
 @app.route('/year/<int:year>.html', defaults={'page':1})
-@app.route('/year/<int:year>/page/<int:page>.html')
+@app.route('/year/<int:year>/<int:page>.html')
 def year(year, page):
     in_year = [p for p in pages if year == p.meta['date'].year]
 
@@ -104,9 +159,27 @@ def year(year, page):
 
     return render_template('year.html', pages=this_page, year=year, pagination=pagination)
 
-###############################################################################
+@app.route('/kind/<string:kind>/<string:name>.html')
+def independent_page(kind, name):
+    matching_pages = [p for p in pages if kind in p.meta.get('kind', []) and p.meta.get('url_path', '') == name]
+
+    if matching_pages:
+        page = matching_pages.pop()
+
+        content_path = os.path.join(config['directories']['prepages'], kind, page.meta.get('file_path', ''))
+
+        if os.path.isfile(content_path):
+            with open(os.path.join(content_path), 'r') as f:
+                text = markdown.markdown(f.read())
+
+            if text:
+                return render_template('independent_page.html', page=page, text=text)
+
+    return render_template('404.html')
+
+#-------------------------------------------------------------------------------
 # Dynamic Routes
-###############################################################################
+#-------------------------------------------------------------------------------
 @app.route('/tags.html')
 def tags():
     all_tags = [p.meta.get('tags', []) for p in pages if p.meta.get('tags', [])]
@@ -119,9 +192,9 @@ def years():
     flattened = sorted(set(all_years), reverse=True)
     return render_template('years.html', years=flattened)
 
-###############################################################################
+#-------------------------------------------------------------------------------
 # Static Routes
-###############################################################################
+#-------------------------------------------------------------------------------
 @app.route('/me.html')
 def me():
     return render_template('about.html')
@@ -130,32 +203,17 @@ def me():
 def resume():
     return render_template('resume.html')
 
-@app.route('/semanticweb.html')
-def semanticweb():
-    return render_template('semantic_web.html')
-
-@app.route('/fogimage.html')
-def fogimage():
-    return render_template('fogimage.html')
-
 @app.route('/404.html')
 def notfound():
     return render_template('404.html')
 
-###############################################################################
+#-------------------------------------------------------------------------------
 # Filters/Miscellaneous
-###############################################################################
+#-------------------------------------------------------------------------------
 @app.template_filter()
 def formatdate(value, format='%Y/%m/%d'):
     """convert a datetime to a different format."""
     return value.strftime(format)
-
-@app.template_filter()
-def excerpt(content):
-    return content.split('</p>', 1)[0] + '</p>'
-
-def short(content):
-    return True if len(content) < 500 else False
 
 def url_for_other_page(page):
     args = request.view_args.copy()
@@ -163,17 +221,17 @@ def url_for_other_page(page):
     return url_for(request.endpoint, **args)
 
 app.jinja_env.filters['formatdate'] = formatdate
-app.jinja_env.filters['excerpt'] = excerpt
+app.jinja_env.filters['lower'] = lambda x: x.lower()
 
-app.jinja_env.globals['short'] = short
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
+app.jinja_env.globals['kinds'] = config['kinds']
+app.jinja_env.globals['metas'] = config['metas']
 
-###############################################################################
+#-------------------------------------------------------------------------------
 # Run
-###############################################################################
+#-------------------------------------------------------------------------------
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == "build":
-            freezer.freeze()
+    if args.build:
+        freezer.freeze()
     else:
-        app.run(port=8000)
-
+        app.run(port=8000, debug=args.debug)

@@ -1,0 +1,11 @@
+{% if page.title is defined %}
+    <h1>
+		<a href="{{ url_for("independent_page", kind=page.kind, name=page.url_path) }}">{{ page.title }}</a>
+    </h1>
+{% endif %}
+
+{% if page.epigraph %}
+	<p class="epigraph">
+		{{ page.epigraph }}
+	</p>
+{% endif %}
