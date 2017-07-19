@@ -24,15 +24,15 @@ html, body {
 
 /******************                Variables                ********************/
 :root {
-	--nav-wrapper-order: 1;
+	--left-wrapper-order: 1;
 	--content-wrapper-order: 2;
 	--content-margin: 3rem;
 	--blurb-width: 60%;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 799px) {
 	:root {
-		--nav-wrapper-order: 2;
+		--left-wrapper-order: 2;
 		--content-wrapper-order: 1;
 		--content-margin: 1.5rem;
 		--blurb-width: 80%;
@@ -40,7 +40,7 @@ html, body {
 }
 
 /******************                Desktop                ********************/
-@media screen and (min-width: 800px) and (min-height: 400px) {
+@media screen and (min-width: 800px) {
     #main {
         flex-direction: row;
         -webkit-box-orient: horizontal;
@@ -48,12 +48,19 @@ html, body {
         -webkit-box-pack: center;
 		margin-top: 2rem;
     }
-    #nav {
+	#left-wrapper {
         align-items: flex-end;
         -webkit-box-align: end;
-		width: 0;
+	}
+    #left-wrapper .nav {
+		display: none;
     }
-    #nav hr {
+    #right-wrapper .nav {
+		margin-top: 1rem;
+        align-items: flex-start;
+        -webkit-box-align: start;
+    }
+    .nav hr {
         margin: .25rem 0;
     }
     #header p {
@@ -62,24 +69,22 @@ html, body {
     #content-wrapper {
         width: 600px;
     }
-    #kinds, 
-    #about,
-    #metas {
-        align-items: flex-end;
-        -webkit-box-align: end;
-    }
-    a.navlink {
+	#right-wrapper .navlink a {
         margin: 0;
-        float: right;
+        float: left;
     }
-	#third-wrapper {
+	#right-wrapper {
 		order: 3;
 		flex-grow: 1;
+	}
+	#left-wrapper,
+	#right-wrapper {
+		width: 100px;
 	}
 }
 
 /******************                 Mobile                ********************/
-@media (max-width: 800px) {
+@media (max-width: 799px) {
     html {
         font-size: 18px;
     }
@@ -88,10 +93,7 @@ html, body {
         -webkit-box-orient: vertical;
         -webkit-box-direction: reverse;
     }
-	#third-wrapper {
-		display: none;
-	}
-    #nav {
+    #left-wrapper .nav {
         -webkit-box-direction: normal;
         align-items: center;
         -webkit-box-align: center;
@@ -100,6 +102,9 @@ html, body {
     #content-wrapper {
         -webkit-box-direction: normal;
     }
+	#right-wrapper {
+		display: none;
+	}
     .navlink a {
         display: block;
         text-align: center;
@@ -120,10 +125,10 @@ html, body {
 #content-wrapper {
 	order: var(--content-wrapper-order);
 }
-#nav-wrapper {
-	flex-direction: row-reverse;
-	-webkit-flex-direction: row-reverse;
-	order: var(--nav-wrapper-order);
+#left-wrapper {
+	flex-direction: column;
+	-webkit-flex-direction: column;
+	order: var(--left-wrapper-order);
 	flex-grow: 1;
 }
 #pagination {
@@ -138,10 +143,9 @@ div #pagination {
     text-align: left;
 }
 
-/* testing pagination stuff*/
-/* need to add in safari code */
 #pagination {
 	justify-content: center;
+	-webkit-box-pack: center;
 }
 #pagination-separator {
 	text-align: center;
@@ -162,7 +166,7 @@ div #pagination {
 
 /******************             Nav and Header                ****************/
 #header {
-	margin-top: .5rem;
+	margin-top: 1rem;
     margin-bottom: 1.5rem;
 }
 #header p {
@@ -185,7 +189,7 @@ div #pagination {
     font-weight: 100;
 }
 
-#nav hr {
+.nav hr {
     width: 4rem;
 }
 .navlink {

@@ -9,37 +9,18 @@
 </head>
 <body>
     <div id="main">
-		<div id="nav-wrapper" class="flex-column">
-			<div id="nav" class="flex-column">
-				<a id="header" href="{{ url_for("index") }}">
+		<div id="left-wrapper" class="flex-column">
+			<div id="header">
+				<a  href="{{ url_for("index") }}">
 					<p class="title">hunter</p>
 					<p class="subtitle">(<span>verb</span>)</p>
 				</a>
-				{% block navlinks %}
-				<hr>
-				<div id="kinds" class="flex-column">
-					{% for kind in kinds %}
-						{% with url=url_for('kind', kind=kind), text=kind %}
-							{% include "_includes/_navlink.html" %}
-						{% endwith %}
-					{% endfor %}
-				</div>
-				<hr>
-				<div id="metas" class="flex-column">
-					{% for meta in metas %}
-						{% with url=url_for(meta|lower), text=meta %}
-								{% include "_includes/_navlink.html" %}
-							{% endwith %}
-						{% endfor %}
-				</div>
-				<hr>
-				<div id="about" class="flex-column">
-					{% with url=url_for('me'), text='Me' %}
-						{% include "_includes/_navlink.html" %}
-					{% endwith %}
-				</div>
-				{% endblock navlinks %}
 			</div>
+			{% block leftnav %}
+				{% with kinds=kinds, metas=metas %}
+					{% include "_includes/_navlinks.html" %}
+				{% endwith %}
+			{% endblock leftnav %}
 		</div>
         <div id="content-wrapper" class="flex-column">
 			<div id="page-intro">
@@ -63,7 +44,13 @@
 				{% endblock content %}
 			</div>
         </div>
-		<div id="third-wrapper"></div>
+		<div id="right-wrapper" class="flex-column">
+			{% block rightnav %}
+				{% with kinds=kinds, metas=metas %}
+					{% include "_includes/_navlinks.html" %}
+				{% endwith %}
+			{% endblock rightnav %}
+		</div>
     </div>
 </body>
 </html>

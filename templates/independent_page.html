@@ -4,8 +4,8 @@
     {{ page.meta.title }} | hunter (verb)
 {% endblock title %}
 
-{% block navlinks %}
-{% endblock navlinks %}
+{% block leftnav %}
+{% endblock leftnav %}
 
 {% block intro %}
     {% with page=page, primary=True %}
@@ -16,3 +16,7 @@
 {% block content %}
 	{{ text | safe }}
 {% endblock content %}
+
+{% block rightnav %}
+{% endblock rightnav %}
+
