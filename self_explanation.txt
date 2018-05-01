@@ -21,7 +21,7 @@ How to work this:
     - verify it looks good
 - get to github:
     - generate the static site:
-        - $ python run.py build
+        - $ python run.py --build
     - go to /build
     - add it 
         - $ git add .
