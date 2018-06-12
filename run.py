@@ -57,12 +57,9 @@ app.url_map.strict_slashes = False
 pages = FlatPages(app)
 freezer = Freezer(app)
 
-def load_config():
-    config_path = os.path.join(os.getcwd(), 'config.yaml')
-    with open(config_path) as f:
-        return yaml.load(f)
-
-config = load_config()
+config_path = os.path.join(os.getcwd(), 'config.yaml')
+with open(config_path) as f:
+    config = yaml.load(f)
 
 #-------------------------------------------------------------------------------
 # Pagination
@@ -117,47 +114,81 @@ def page(path):
 
     return render_template('page.html', page=page)
 
+
 @app.route('/kind/<string:kind>.html', defaults={'page':1})
 @app.route('/kind/<string:kind>/<int:page>.html')
 def kind(kind, page):
-    in_kind = [p for p in pages if kind in p.meta.get('kind', [])]
+    in_kind = list(filter(lambda p: kind in p.meta.get('kind'), pages))
 
-    pagination = Pagination(page, PER_PAGE, len(in_kind))
-    if page > pagination.pages:
-        return render_template('404.html')
+    return paged_response(
+        page=page,
+        pages=in_kind,
+        template='kind.html',
+        kwargs_to_send={
+            'kind' : kind,
+            'subkinds' : list(set([p.meta.get('subkind') for p in in_kind if p.meta.get('subkind')])),
+        }
+    )
 
-    recent = sorted(in_kind, reverse=True, key=lambda p: p.meta['date'])
-    this_page = recent[(page - 1) * PER_PAGE:][:PER_PAGE]
 
-    return render_template('kind.html', pages=this_page, kind=kind, pagination=pagination)
+@app.route('/kind/<string:kind>/<string:subkind_slug>.html', defaults={'page':1})
+@app.route('/kind/<string:kind>/<string:subkind_slug>/<int:page>.html')
+def sub_kind(kind, subkind_slug, page):
+    subkind = sluggify_subkind(subkind_slug, to_slug=False)
+    return paged_response(
+        page=page,
+        template='subkind.html',
+        pages=list(
+            filter(
+                lambda p: kind in p.meta.get('kind', ''),
+                filter(lambda p: subkind == p.meta.get('subkind', ''), pages)
+            )
+        ),
+        kwargs_to_send={
+            'kind' : kind,
+            'subkind' : subkind,
+            'subkind_slug' : subkind_slug,
+        }
+    )
+
 
 @app.route('/tagged/<string:tag>.html', defaults={'page':1})
 @app.route('/tagged/<string:tag>/<int:page>.html')
 def tag(tag, page):
-    tagged = [p for p in pages if tag in p.meta.get('tags', [])]
+    return paged_response(
+        page=page,
+        template='tag.html',
+        pages=list(filter(lambda p: tag in p.meta.get('tags', []), pages)),
+        kwargs_to_send={
+            'tag' : tag,
+        }
+    )
 
-    pagination = Pagination(page, PER_PAGE, len(tagged))
-    if page > pagination.pages:
-        return render_template('404.html')
-
-    recent = sorted(tagged, reverse=True, key=lambda p: p.meta['date'])
-    this_page = recent[(page - 1) * PER_PAGE:][:PER_PAGE]
-
-    return render_template('tag.html', pages=this_page, tag=tag, pagination=pagination)
 
 @app.route('/year/<int:year>.html', defaults={'page':1})
 @app.route('/year/<int:year>/<int:page>.html')
 def year(year, page):
-    in_year = [p for p in pages if year == p.meta['date'].year]
+    return paged_response(
+        page=page,
+        template='year.html',
+        pages=list(filter(lambda p: p.meta['date'].year == year, pages)),
+        kwargs_to_send={
+            'year' : year,
+        }
+    )
 
-    pagination = Pagination(page, PER_PAGE, len(in_year))
+
+def paged_response(page, template, kwargs_to_send={}, pages=[]):
+    pagination = Pagination(page, PER_PAGE, len(pages))
     if page > pagination.pages:
         return render_template('404.html')
 
-    recent = sorted(in_year, reverse=True, key=lambda p: p.meta['date'])
-    this_page = recent[(page - 1) * PER_PAGE:][:PER_PAGE]
+    recent = sorted(pages, reverse=True, key=lambda p: p.meta['date'])
+    kwargs_to_send['pages'] = recent[(page - 1) * PER_PAGE:][:PER_PAGE]
+    kwargs_to_send['pagination'] = pagination
 
-    return render_template('year.html', pages=this_page, year=year, pagination=pagination)
+    return render_template(template, **kwargs_to_send)
+
 
 @app.route('/kind/<string:kind>/<string:name>.html')
 def independent_page(kind, name):
@@ -186,6 +217,7 @@ def tags():
     flattened = sorted(set([item for sublist in all_tags for item in sublist]))
     return render_template('tags.html', tags=flattened)
 
+
 @app.route('/years.html')
 def years():
     all_years = [p.meta['date'].year for p in pages if p.meta['date']]
@@ -199,9 +231,11 @@ def years():
 def me():
     return render_template('about.html')
 
+
 @app.route('/resume.html')
 def resume():
     return render_template('resume.html')
+
 
 @app.route('/404.html')
 def notfound():
@@ -214,6 +248,14 @@ def notfound():
 def formatdate(value, format='%Y/%m/%d'):
     """convert a datetime to a different format."""
     return value.strftime(format)
+
+@app.template_filter()
+def sluggify_subkind(subkind, to_slug=True):
+    if to_slug:
+        return subkind.replace(' ', '_')
+    else:
+        return subkind.replace('_', ' ')
+
 
 def url_for_other_page(page):
     args = request.view_args.copy()

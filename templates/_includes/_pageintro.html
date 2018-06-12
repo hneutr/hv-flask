@@ -2,57 +2,75 @@
     {% if primary is defined %}
     <h1>
     {% else %}
-	<h2>
-	{% endif %}
+    <h2>
+    {% endif %}
 
-	<a href=
-		{% if page.independent %}
-			"{{ url_for("independent_page", kind=page.kind, name=page.url_path) }}"
-		{% elif page.link %}
-			"{{ page.link }}"
-		{% else %}
-			"{{ url_for("page", path=page.path) }}"
-		{% endif %}
-	>
-		{{ page.title }}
-	</a>
+    <a href=
+        {% if page.independent %}
+            "{{ url_for("independent_page", kind=page.kind, name=page.url_path) }}"
+        {% elif page.link %}
+            "{{ page.link }}"
+        {% else %}
+            "{{ url_for("page", path=page.path) }}"
+        {% endif %}
+    >
+        {{ page.title }}
+    </a>
 
     {% if primary is defined %}
     </h1>
     {% else %}
-	</h2>
-	{% endif %}
+    </h2>
+    {% endif %}
 {% endif %}
 <div class="blurb flex-column">
-	<div class="info flex-row">
-		<div class="context flex-column">
-			<div class="kind">
-				{% if page.kind is defined and nokind is not defined %}
-				<p>in: <a href="{{ url_for("kind", kind=page.kind) }}">{{ page.kind }}</a></p>
-				{% endif %}
-			</div>
-			<div class="tags">
-				{% if page.tags|length %}
-					<p> tags: 
-						{% for page_tag in page.meta.tags %}
-							<a href="{{ url_for("tag", tag=page_tag) }}">{{ page_tag }}</a>
-							{%- if not loop.last %},{% endif %}
-						{% endfor %}
-					</p>
-				{% endif %}
-			</div>
-		</div>
+    <div class="info flex-row">
+        <div class="context flex-column">
+            <div class="kind">
+                {% if not nosubkind or not nokind %}
+                    {% if page.kind is defined and not nokind %}
+                    <p>in: 
+                    {% elif page.subkind is defined and not nosubkind %}
+                    <p>in: 
+                    {% endif%}
 
-		<div class="date">
-			{% if page.date is defined %}
-				<p><a href="{{ url_for('year', year=page.date.year) }}">{{ page.date|formatdate }}</a></p>
-			{% endif %}
-		</div>
-	</div>
+                    {% if page.kind is defined and nokind is not defined %}
+                        <a href="{{ url_for("kind", kind=page.kind) }}">{{ page.kind }}</a>
+                    {% endif %}
+                    {% if not nosubkind and not nokind and page.meta.subkind is defined %}
+                        > 
+                    {% endif%}
 
-	{% if page.description is defined %}
-		<div class="description">
-			<p>{{ page.description }}</p>
-		</div>
-	{% endif %}
+                    {% if page.meta.subkind is defined and nosubkind is not defined %}
+                        <a href="{{ url_for("sub_kind", kind=page.meta.kind, subkind_slug=page.meta.subkind|sluggify_subkind) }}">{{ page.subkind }}</a>
+                    {% endif%}
+                    {% if page.kind is defined and not nokind %}
+                    </p>
+                    {% elif page.subkind is defined and not nosubkind %}
+                    </p>
+                    {% endif%}
+                {% endif %}
+            </div>
+            <div class="tags">
+                {% if page.tags|length %}
+                    <p> tags: 
+                        {% for page_tag in page.meta.tags %}
+                            <a href="{{ url_for("tag", tag=page_tag) }}">{{ page_tag }}</a>
+                            {%- if not loop.last %},{% endif %}
+                        {% endfor %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="date">
+            {% if page.date is defined %}
+                <p><a href="{{ url_for('year', year=page.date.year) }}">{{ page.date|formatdate }}</a></p>
+            {% endif %}
+        </div>
+    </div>
+    {% if page.description is defined %}
+        <div class="description">
+            <p>{{ page.description }}</p>
+        </div>
+    {% endif %}
 </div>
