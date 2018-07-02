@@ -24,19 +24,19 @@ html, body {
 
 /******************                Variables                ********************/
 :root {
-	--left-wrapper-order: 1;
-	--content-wrapper-order: 2;
-	--content-margin: 3rem;
-	--blurb-width: 60%;
+    --left-wrapper-order: 1;
+    --content-wrapper-order: 2;
+    --content-margin: 3rem;
+    --blurb-width: 60%;
 }
 
 @media (max-width: 799px) {
-	:root {
-		--left-wrapper-order: 2;
-		--content-wrapper-order: 1;
-		--content-margin: 1.5rem;
-		--blurb-width: 80%;
-	}
+    :root {
+        --left-wrapper-order: 2;
+        --content-wrapper-order: 1;
+        --content-margin: 1.5rem;
+        --blurb-width: 80%;
+    }
 }
 
 /******************                Desktop                ********************/
@@ -46,41 +46,48 @@ html, body {
         -webkit-box-orient: horizontal;
         justify-content: center;
         -webkit-box-pack: center;
-		margin-top: 2rem;
+	margin-top: 2rem;
     }
-	#left-wrapper {
+
+    #left-wrapper {
         align-items: flex-end;
         -webkit-box-align: end;
-	}
-    #left-wrapper .nav {
-		display: none;
     }
+
+    #left-wrapper .nav {
+	display: none;
+    }
+
     #right-wrapper .nav {
-		margin-top: 1rem;
+	margin-top: 1rem;
         align-items: flex-start;
         -webkit-box-align: start;
     }
+
     .nav hr {
         margin: .25rem 0;
     }
+
     #header p {
         text-align: right;
     }
+
     #content-wrapper {
         width: 600px;
     }
-	#right-wrapper .navlink a {
+
+    #right-wrapper .navlink a {
         margin: 0;
         float: left;
     }
-	#right-wrapper {
-		order: 3;
-		flex-grow: 1;
-	}
-	#left-wrapper,
-	#right-wrapper {
-		width: 100px;
-	}
+    #right-wrapper {
+        order: 3;
+        flex-grow: 1;
+    }
+    #left-wrapper,
+    #right-wrapper {
+        width: 100px;
+    }
 }
 
 /******************                 Mobile                ********************/
@@ -88,27 +95,33 @@ html, body {
     html {
         font-size: 18px;
     }
+
     #main {
         flex-direction: column;
         -webkit-box-orient: vertical;
         -webkit-box-direction: reverse;
     }
+
     #left-wrapper .nav {
         -webkit-box-direction: normal;
         align-items: center;
         -webkit-box-align: center;
         margin: 1.5rem auto;
     }
+
     #content-wrapper {
         -webkit-box-direction: normal;
     }
-	#right-wrapper {
-		display: none;
-	}
+
+    #right-wrapper {
+        display: none;
+    }
+
     .navlink a {
         display: block;
         text-align: center;
     }
+
     p.title, 
     p.subtitle {
         text-align: center;
@@ -122,67 +135,79 @@ html, body {
     display: -ms-flexbox; 
     display: flex;
 }
+
 #content-wrapper {
-	order: var(--content-wrapper-order);
+    order: var(--content-wrapper-order);
 }
+
 #left-wrapper {
-	flex-direction: column;
-	-webkit-flex-direction: column;
-	order: var(--left-wrapper-order);
-	flex-grow: 1;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    order: var(--left-wrapper-order);
+    flex-grow: 1;
 }
+
 #pagination {
     justify-content: space-between;
     -webkit-box-pack: justify;
 }
+
 div #pagination {
     padding: 1rem;
-	margin: 2rem 1rem 1rem 1rem;
+    margin: 2rem 1rem 1rem 1rem;
 }
+
 .page-content {
     text-align: left;
 }
 
 #pagination {
-	justify-content: center;
-	-webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-pack: center;
 }
+
 #pagination-separator {
-	text-align: center;
-	padding: 0;
-	margin: 0;
-	flex-grow: 0;
-	flex-basis: 10%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    flex-grow: 0;
+    flex-basis: 10%;
 }
+
 #pagination div.left {
-	text-align: right;
-	flex-grow: 1;
-	flex-basis: 45%;
+    text-align: right;
+    flex-grow: 1;
+    flex-basis: 45%;
 }
+
 #pagination div.right {
-	flex-grow: 1;
-	flex-basis: 45%;
+    flex-grow: 1;
+    flex-basis: 45%;
 }
 
 /******************             Nav and Header                ****************/
 #header {
-	margin-top: 1rem;
+    margin-top: 1rem;
     margin-bottom: 1.5rem;
 }
+
 #header p {
     margin-bottom: 0;
 }
+
 #header p.title {
     margin-top: 0;
     font-size: 1.5rem;
     font-weight: 300;
 }
+
 #header p.subtitle {
     color: #d4d4d4;
     margin-top: -.5rem;
     font-weight: 600;
     font-size: 1rem;
 }
+
 #header p.subtitle span {
     color: #000000;
     font-size: 1rem;
@@ -192,60 +217,69 @@ div #pagination {
 .nav hr {
     width: 4rem;
 }
+
 .navlink {
     height: 1.25rem;
     margin: .25rem 0;
 }
+
 .navlink a {
     font-weight: 200;
     font-size: .85rem;
 }
 
 #content {
-	margin: var(--content-margin);
+    margin: var(--content-margin);
 }
 
 /******************                Elements                *******************/
 #page-intro {
-	text-align: center;
-	padding: 1.5rem 0 1.5rem 0;
+    text-align: center;
+    padding: 1.5rem 0 1.5rem 0;
 }
+
 #page-intro h1 {
-	font-size: 2.5rem;
-	font-weight: 200;
-	margin: 1.5rem var(--content-margin);
+    font-size: 2.5rem;
+    font-weight: 200;
+    margin: 1.5rem var(--content-margin);
 }
+
 #page-intro h3 {
-	margin: 0;
+    margin: 0;
     font-weight: 200;
     font-size: 1rem;
-	margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 hr {
     width: 40%;
     margin: 2rem auto;
 }
+
 hr.stubspacer {
-	width: 40%;
-	margin: 3rem auto;
+    width: 40%;
+    margin: 3rem auto;
 }
 
 #header-body-split hr.small {
-	width: 1rem;
-	margin: 0 auto;
+    width: 1rem;
+    margin: 0 auto;
 }
+
 #header-body-split hr.large {
-	width: 3rem;
-	margin: .5rem auto;
+    width: 3rem;
+    margin: .5rem auto;
 }
+
 .stub {
-	text-align: center;
+    text-align: center;
 }
+
 .stub hr {
     width: 3rem;
     margin: 1rem auto;
 }
+
 .stub h2 {
     margin: 0;    
     font-weight: 300;
@@ -253,27 +287,32 @@ hr.stubspacer {
 }
 
 .blurb {
-	width: var(--blurb-width);
-	margin: 1.5rem auto 0 auto;
+    width: var(--blurb-width);
+    margin: 1.5rem auto 0 auto;
 }
+
 .blurb p {
     margin: 0;
     font-size: .8rem;
 }
+
 .blurb div.info {
-	order: 1;
-	justify-content: space-between;
+    order: 1;
+    justify-content: space-between;
 }
+
 .blurb div.info div.context {
 	flex-grow: 2;
 }
+
 .blurb div.info div.context p {
-	text-align: left;
-	margin: 0;
+    text-align: left;
+    margin: 0;
 }
+
 .blurb div.description {
-	order: 3;
-	margin-top: 1.5rem;
+    order: 3;
+    margin-top: 1.5rem;
 }
 
 p.spacer {
@@ -282,12 +321,14 @@ p.spacer {
 }
 
 #page-body p {
-	margin: 0 auto;
-	text-indent: 2.5rem;
+    margin: 0 auto;
+    text-indent: 2.5rem;
 }
+
 #page-body p:first-child {
     margin-top: 0;
 }
+
 #page-body p:last-child {
     margin-bottom: 0;
 }
@@ -297,6 +338,7 @@ p.verse-mid,
 p.verse-last {
     margin-bottom: 0;
 }
+
 p.verse-mid,
 p.verse-bot {
     margin-top: 0;
@@ -307,12 +349,14 @@ a {
     color: #000000;
     border-bottom: 1px solid #e4e4e4;
 }
+
 a:hover,
 .navlink a:hover,
 .stub h2 a:hover {
     border-bottom: 1px solid #e4e4e4;
     box-shadow: inset 0 -8px 0 #e4e4e4;
 }
+
 a#header, 
 .navlink a,
 #page-intro h1 a,
@@ -329,9 +373,11 @@ img {
 ul {
   list-style-type: none;
 }
+
 ul > li {
   text-indent: -.5rem;
 }
+
 ul > li:before {
   content: "–";
   text-indent: -.5rem;
@@ -339,9 +385,9 @@ ul > li:before {
 }
 
 #page-body.word-list > p {
-	text-align: center;
-	margin: 1rem 0;
-	text-indent: 0;
+    text-align: center;
+    margin: 1rem 0;
+    text-indent: 0;
 }
 
 hr {
