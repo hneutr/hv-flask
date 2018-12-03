@@ -1,23 +1,23 @@
-<div class="nav flex-column">
-	<div class="kinds flex-column">
-		{% for kind in kinds %}
-			{% with url=url_for('kind', kind=kind), text=kind %}
-				{% include "_includes/_navlink.html" %}
-			{% endwith %}
-		{% endfor %}
-	</div>
-	<hr>
-	<div class="metas flex-column">
-		{% for meta in metas %}
-			{% with url=url_for(meta|lower), text=meta %}
-					{% include "_includes/_navlink.html" %}
-				{% endwith %}
-			{% endfor %}
-	</div>
-	<hr>
-	<div class="about flex-column">
-		{% with url=url_for('me'), text='Me' %}
-			{% include "_includes/_navlink.html" %}
-		{% endwith %}
-	</div>
+<div class="flex-column">
+    <div class="kinds flex-column">
+        {% for kind in kinds %}
+            {% with url=url_for('kind', kind=kind), text=kind %}
+                {% include "_includes/_navlink.html" %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+    <hr class="nav-hr">
+    <div class="metas flex-column">
+        {% for meta in metas %}
+            {% with url=url_for(meta|lower), text=meta %}
+                {% include "_includes/_navlink.html" %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+    <hr class="nav-hr">
+    <div class="about flex-column">
+        {% with url=url_for('me'), text='Me' %}
+            {% include "_includes/_navlink.html" %}
+        {% endwith %}
+    </div>
 </div>

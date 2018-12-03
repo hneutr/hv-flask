@@ -4,29 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}hunter (verb){% endblock title %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?{{now()}}"/>
     {% block style %} {% endblock style %}
 </head>
 <body>
     <div id="main">
-        <div id="left-wrapper" class="flex-column">
+        <div id="header" class="side-column">
             <div id="header">
-                <a  href="{{ url_for("index") }}">
-                    <p class="title">hunter</p>
-                    <p class="subtitle">(<span>verb</span>)</p>
+                <a href="{{ url_for("index") }}">
+                    <p id="header-title" class="header-text">hunter</p>
+                    <p id="header-subtitle" class="header-text">(<span id="header-verb-span">verb</span>)</p>
                 </a>
             </div>
-            {% block leftnav %}
-                {% with kinds=kinds, metas=metas %}
-                    {% include "_includes/_navlinks.html" %}
-                {% endwith %}
-            {% endblock leftnav %}
         </div>
         <div id="content-wrapper" class="flex-column">
             <div id="page-intro">
                 {% block intro %}
-                    <h1>I'm Hunter.</h1>
-                    <h3>be doing</h3>
+                    <h1 class="page-intro-header">I'm Hunter.</h1>
+                    <p class="page-intro-sutitle">be doing</p>
                 {% endblock intro %}
             </div>
             <div id="header-body-split">
@@ -42,12 +37,13 @@
                 {% endblock content %}
             </div>
         </div>
-        <div id="right-wrapper" class="flex-column">
-            {% block rightnav %}
+        <div id="nav" class="side-column">
+            {% block nav %}
                 {% with kinds=kinds, metas=metas %}
                     {% include "_includes/_navlinks.html" %}
                 {% endwith %}
-            {% endblock rightnav %}
+                <br>
+            {% endblock nav %}
         </div>
     </div>
 </body>

@@ -4,6 +4,7 @@ from flask_frozen import Freezer
 
 import argparse
 import copy
+import datetime
 import io
 import json
 import markdown
@@ -114,7 +115,6 @@ def page(path):
 
     return render_template('page.html', page=page)
 
-
 @app.route('/kind/<string:kind>.html', defaults={'page':1})
 @app.route('/kind/<string:kind>/<int:page>.html')
 def kind(kind, page):
@@ -131,8 +131,8 @@ def kind(kind, page):
     )
 
 
-@app.route('/kind/<string:kind>/<string:subkind_slug>.html', defaults={'page':1})
-@app.route('/kind/<string:kind>/<string:subkind_slug>/<int:page>.html')
+@app.route('/kind/<string:kind>/sub/<string:subkind_slug>.html', defaults={'page':1})
+@app.route('/kind/<string:kind>/sub/<string:subkind_slug>/<int:page>.html')
 def sub_kind(kind, subkind_slug, page):
     subkind = sluggify_subkind(subkind_slug, to_slug=False)
     return paged_response(
@@ -208,6 +208,7 @@ def independent_page(kind, name):
 
     return render_template('404.html')
 
+
 #-------------------------------------------------------------------------------
 # Dynamic Routes
 #-------------------------------------------------------------------------------
@@ -249,6 +250,7 @@ def formatdate(value, format='%Y/%m/%d'):
     """convert a datetime to a different format."""
     return value.strftime(format)
 
+
 @app.template_filter()
 def sluggify_subkind(subkind, to_slug=True):
     if to_slug:
@@ -262,12 +264,15 @@ def url_for_other_page(page):
     args['page'] = page
     return url_for(request.endpoint, **args)
 
+
 app.jinja_env.filters['formatdate'] = formatdate
 app.jinja_env.filters['lower'] = lambda x: x.lower()
 
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 app.jinja_env.globals['kinds'] = config['kinds']
 app.jinja_env.globals['metas'] = config['metas']
+app.jinja_env.globals['now'] = datetime.datetime.utcnow
+
 
 #-------------------------------------------------------------------------------
 # Run

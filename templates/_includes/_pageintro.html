@@ -1,11 +1,11 @@
 {% if page.title is defined %}
     {% if primary is defined %}
-    <h1>
+    <h1 class="page-intro-header">
     {% else %}
-    <h2>
+    <h2 class="stub-header">
     {% endif %}
 
-    <a href=
+    <a class="unstyled-link" href=
         {% if page.independent %}
             "{{ url_for("independent_page", kind=page.kind, name=page.url_path) }}"
         {% elif page.link %}
@@ -24,8 +24,8 @@
     {% endif %}
 {% endif %}
 <div class="blurb flex-column">
-    <div class="info flex-row">
-        <div class="context flex-column">
+    <div class="blurb-info flex-row">
+        <div class="blurb-context flex-column">
             <div class="kind">
                 {% if not nosubkind or not nokind %}
                     {% if page.kind is defined and not nokind %}
@@ -69,7 +69,7 @@
         </div>
     </div>
     {% if page.description is defined %}
-        <div class="description">
+        <div class="blurb-description">
             <p>{{ page.description }}</p>
         </div>
     {% endif %}

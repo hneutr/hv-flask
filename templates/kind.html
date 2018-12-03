@@ -10,7 +10,7 @@
 {% if subkinds %}
 <h3>
 {% for subkind in subkinds %}
-    <a href="{{ url_for("sub_kind", kind=kind, subkind_slug=subkind|sluggify_subkind)}}">{{subkind}}</a>
+    <a class="subkind-link" href="{{ url_for("sub_kind", kind=kind, subkind_slug=subkind|sluggify_subkind)}}">{{subkind}}</a>
     {% if not loop.last %},{% endif %}
 {% endfor %}
 </h3>
