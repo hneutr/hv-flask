@@ -1,7 +1,6 @@
 directories:
     prepages: prepages
 kinds:
-    - Thoughts
     - Playlists
     - Projects
     - Written

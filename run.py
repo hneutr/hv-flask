@@ -108,7 +108,7 @@ def page(path):
     page = pages.get_or_404(path)
 
     if page.meta.get('independent', False):
-        kind = page.meta.get('kind','')
+        kind = page.meta.get('kind', '')
         page_url = page.meta.get('url_path','')
 
         redirect(url_for(kind + '/' + page_url + '.html'))
@@ -118,7 +118,7 @@ def page(path):
 @app.route('/kind/<string:kind>.html', defaults={'page':1})
 @app.route('/kind/<string:kind>/<int:page>.html')
 def kind(kind, page):
-    in_kind = list(filter(lambda p: kind in p.meta.get('kind'), pages))
+    in_kind = list(filter(lambda p: kind in p.meta.get('kind', ''), pages))
 
     return paged_response(
         page=page,
