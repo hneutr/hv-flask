@@ -3,17 +3,5 @@
 {% block title %}me | hunter (verb){% endblock title %}
 
 {% block content %}
-<div id="page-body">
-    <p>My name's (Kenneth) Hunter (Wapman), I'm a graduate student in Computer Science working with <a href="danlarremore.com">Dan Larremore</a>. I dig doing; I'm into understanding. My research is around structure and complexity in art.</p>
-
-    <p>Words are cool, vim is too; relaxing is climbing and running.</p>
-
-    <p>Hit me up if you wanna talk about Bosch.</p>
-
-    <ul>
-        <li>email: <a href="mailto:hunter.wapman@gmail.com">hunter.wapman@gmail.com</a></li>
-        <li>github: <a href="https://github.com/hneutr">github.com/hneutr</a></li>
-        <li>resume: <a href="{{ url_for('resume')}}">here</a></li>
-    </ul>
-</div>
+{% include "me.html"%}
 {% endblock content %}

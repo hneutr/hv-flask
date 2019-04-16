@@ -4,6 +4,7 @@
 {% block title %}hunter (verb){% endblock title %}
 
 {% block content %}
+    {{super()}}
     {% with pages=pages  %}
         {% include "_includes/_pagelist.html" %}
     {% endwith %}

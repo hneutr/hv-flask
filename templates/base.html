@@ -24,15 +24,18 @@
                     <p class="page-intro-sutitle">be doing</p>
                 {% endblock intro %}
             </div>
-            <div id="header-body-split">
+            <div class="triple-split">
                 <hr class="small">
                 <hr class="large">
                 <hr class="small">
             </div>
             <div id="content">
                 {% block content %}
-                <div id="page-body">
-                    Niente.
+                {% include "me.html" %}
+                <div class="triple-split about">
+                    <hr class="small">
+                    <hr class="large">
+                    <hr class="small">
                 </div>
                 {% endblock content %}
             </div>

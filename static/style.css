@@ -243,16 +243,30 @@ a:hover {
     margin-bottom: 1.5em;
 }
 
-#header-body-split hr.small {
+.triple-split hr.small {
     width: 1rem;
     margin: 0 auto;
 }
 
-#header-body-split hr.large {
+.triple-split hr.large {
     width: 3rem;
     margin: .5rem auto;
 }
 
+.triple-split hr.small {
+    width: 1rem;
+    margin: 0 auto;
+}
+
+.triple-split hr.large {
+    width: 3rem;
+    margin: .5rem auto;
+}
+
+.triple-split.about {
+    margin: var(--content-margin);
+
+}
 /*******************************************************************************
  * stub
 *******************************************************************************/

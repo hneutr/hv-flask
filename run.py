@@ -233,9 +233,9 @@ def me():
     return render_template('about.html')
 
 
-@app.route('/resume.html')
-def resume():
-    return render_template('resume.html')
+@app.route('/cv.html')
+def cv():
+    return render_template('cv.html')
 
 
 @app.route('/404.html')
