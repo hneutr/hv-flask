@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% from '_macros/paginate.html' import paginate with context %}
+
+{% block title %}
+    {{ kind }} | hunter (verb)
+{% endblock title %}
+
+{% block intro %}
+<h1><a href="{{ url_for("networks_of_books") }}">books</a></h1>
+{% endblock intro %}
+
+{% block content %}
+    {% for book in pages %}
+        <div class="stub">
+            {% with book=book %}
+                {% include "_includes/_bookintro.html" %}
+            {% endwith %}
+        </div>
+        {% if not loop.last %}
+            <hr class="stub-hr">
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

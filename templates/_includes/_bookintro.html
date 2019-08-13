@@ -1,0 +1,6 @@
+{% with book=book %}
+    {% include "_includes/_book_visual_stub.html" %}
+{% endwith %}
+<p>
+<p class="book-title"><i>{{ book.title }}</i></p>
+<p class="book-author">{{ book.author_name }}</p>
