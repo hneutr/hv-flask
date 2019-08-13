@@ -171,7 +171,7 @@ def year(year, page):
     return paged_response(
         page=page,
         template='year.html',
-        pages=list(filter(lambda p: p.meta['date'].year == year, pages)),
+        pages=list(filter(lambda p: p.meta['date'].year == year, [p for p in pages if p.meta.get('date')])),
         kwargs_to_send={
             'year' : year,
         }
@@ -221,7 +221,7 @@ def tags():
 
 @app.route('/years.html')
 def years():
-    all_years = [p.meta['date'].year for p in pages if p.meta['date']]
+    all_years = [p.meta['date'].year for p in pages if p.meta.get('date')]
     flattened = sorted(set(all_years), reverse=True)
     return render_template('years.html', years=flattened)
 
