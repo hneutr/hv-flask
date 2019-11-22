@@ -1,9 +1,8 @@
 directories:
     prepages: prepages
 kinds:
-    - Playlists
-    - Projects
-    - Written
+    - playlists
+    - projects
+    - written
 metas:
-    - Tags
-    - Years
+    - years

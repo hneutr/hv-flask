@@ -275,8 +275,8 @@ a:hover {
 }
 
 .stub-hr {
-    width: 40%;
-    margin: 3rem auto;
+    width: 10%;
+    margin: 2.5rem auto;
 }
 
 .stub-header {
@@ -290,7 +290,7 @@ a:hover {
 *******************************************************************************/
 .blurb {
     width: var(--blurb-width);
-    margin: 1.5rem auto 0 auto;
+    margin: 0 auto;
 }
 
 .blurb p {
@@ -379,4 +379,9 @@ hr {
     background-color: grey;
     width: 40%;
     margin: 2rem auto;
+}
+
+.date {
+  margin: 0 auto;
+
 }
