@@ -1,4 +1,4 @@
-Flask==0.10.1
+Flask==1.0
 Flask-Cors==1.10.3
 Flask-FlatPages==0.6
 Frozen-Flask==0.11
