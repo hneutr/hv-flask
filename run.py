@@ -1,44 +1,16 @@
-from flask import Flask, render_template, redirect, request, url_for
-from flask_flatpages import FlatPages
-from flask_frozen import Freezer
-
 import argparse
 import datetime
 import markdown
 import math
-import os
 import yaml
+from pathlib import Path
 
+from flask import Flask, render_template, redirect, request, url_for
+from flask_flatpages import FlatPages
+from flask_frozen import Freezer
 
-################################################################################
-# ARGUMENTPARSING
-################################################################################
-def get_args():
-    """Defines an argument parser for this script and returns the flags this
-    package is called with
-    """
+import constants
 
-    parser = argparse.ArgumentParser(description='my site')
-
-    parser.add_argument(
-        '-b', '--build',
-        help='build flatpages',
-        default=False,
-        action='store_true')
-
-    parser.add_argument(
-        '-d',
-        '--debug',
-        help="print debug messages",
-        default=False,
-        action="store_true")
-
-    return parser.parse_args()
-
-args = get_args()
-
-if args.debug:
-    FREEZER_DESTINATION = 'build_test'
 
 FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
@@ -52,9 +24,10 @@ app.url_map.strict_slashes = False
 pages = FlatPages(app)
 freezer = Freezer(app)
 
-config_path = os.path.join(os.getcwd(), 'config.yaml')
-with open(config_path) as f:
-    config = yaml.load(f, Loader=yaml.FullLoader)
+config = yaml.load(
+    constants.CONFIG_PATH.read_text(),
+    Loader=yaml.FullLoader
+)
 
 
 ################################################################################
@@ -91,7 +64,7 @@ def index(page):
     if page > pagination.pages:
         return render_template('404.html')
 
-    recent = sorted(dated, reverse=True, key=lambda p: p.meta['date'])
+    recent = sorted(dated, key=lambda p: p.meta['date'], reverse=True)
     this_page = recent[(page - 1) * PER_PAGE:][:PER_PAGE]
 
     return render_template('index.html', pages=this_page, pagination=pagination)
@@ -131,32 +104,17 @@ def kind(kind, page):
 @app.route('/kind/<string:kind>/sub/<string:subkind_slug>/<int:page>.html')
 def sub_kind(kind, subkind_slug, page):
     subkind = sluggify_subkind(subkind_slug, to_slug=False)
+    kind_pages = [p for p in pages if kind in p.meta.get('kind', [])]
+    subkind_pages = [p for p in kind_pages if subkind in p.meta.get('subkind', [])]
+
     return paged_response(
         page=page,
         template='subkind.html',
-        pages=list(
-            filter(
-                lambda p: kind in p.meta.get('kind', ''),
-                filter(lambda p: subkind == p.meta.get('subkind', ''), pages)
-            )
-        ),
+        pages=subkind_pages,
         kwargs_to_send={
             'kind': kind,
             'subkind': subkind,
             'subkind_slug': subkind_slug,
-        }
-    )
-
-
-@app.route('/tagged/<string:tag>.html', defaults={'page': 1})
-@app.route('/tagged/<string:tag>/<int:page>.html')
-def tag(tag, page):
-    return paged_response(
-        page=page,
-        template='tag.html',
-        pages=list(filter(lambda p: tag in p.meta.get('tags', []), pages)),
-        kwargs_to_send={
-            'tag': tag,
         }
     )
 
@@ -167,7 +125,7 @@ def year(year, page):
     return paged_response(
         page=page,
         template='year.html',
-        pages=list(filter(lambda p: p.meta['date'].year == year, [p for p in pages if p.meta.get('date')])),
+        pages=[p for p in pages if p.meta.get('date') and p.meta['date'].year == year],
         kwargs_to_send={
             'year': year,
         }
@@ -188,19 +146,32 @@ def paged_response(page, template, kwargs_to_send={}, pages=[]):
 
 @app.route('/kind/<string:kind>/<string:name>.html')
 def independent_page(kind, name):
-    matching_pages = [p for p in pages if kind in p.meta.get('kind', []) and p.meta.get('url_path', '') == name]
+    matching_pages = [p for p in pages if kind in p.meta.get('kind', [])]
+    matching_pages = [p for p in pages if p.meta.get('url_path', '') == name]
 
     if matching_pages:
         page = matching_pages.pop()
 
-        content_path = os.path.join(config['directories']['prepages'], kind, page.meta.get('file_path', ''))
+        content_path = Path(page.meta.get('file_path', ''))
 
-        if os.path.isfile(content_path):
-            with open(os.path.join(content_path), 'r') as f:
-                text = markdown.markdown(f.read())
+        if content_path.exists():
+            raw_text = content_path.read_text()
 
-            if text:
-                return render_template('independent_page.html', page=page, text=text)
+            if raw_text:
+                # strip the title if it is the first line
+                lines = raw_text.split("\n")
+                first_line = lines[0].strip()
+                title = page.meta.get('title')
+                for surround_character in ['"', '__', '_', '*', '**', '']:
+                    if first_line == surround_character + title + surround_character:
+                        lines = lines[1:]
+                        break
+
+                return render_template(
+                    'independent_page.html',
+                    page=page,
+                    text=markdown.markdown("\n".join(lines))
+                )
 
     return render_template('404.html')
 
@@ -208,18 +179,12 @@ def independent_page(kind, name):
 ################################################################################
 # Dynamic Routes
 ################################################################################
-@app.route('/tags.html')
-def tags():
-    all_tags = [p.meta.get('tags', []) for p in pages if p.meta.get('tags', [])]
-    flattened = sorted(set([item for sublist in all_tags for item in sublist]))
-    return render_template('tags.html', tags=flattened)
-
-
 @app.route('/years.html')
 def years():
-    all_years = [p.meta['date'].year for p in pages if p.meta.get('date')]
-    flattened = sorted(set(all_years), reverse=True)
-    return render_template('years.html', years=flattened)
+    return render_template(
+        'years.html',
+        years=sorted({p.meta['date'].year for p in pages if p.meta.get('date')}, reverse=True),
+    )
 
 ################################################################################
 # Static Routes
@@ -274,7 +239,17 @@ app.jinja_env.globals['now'] = datetime.datetime.utcnow
 # Run
 ################################################################################
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='hnesite')
+
+    parser.add_argument(
+        '-b', '--build',
+        help='build flatpages',
+        default=False,
+        action='store_true')
+
+    args = parser.parse_args()
+
     if args.build:
         freezer.freeze()
     else:
-        app.run(port=8000, debug=args.debug)
+        app.run(port=8000)
