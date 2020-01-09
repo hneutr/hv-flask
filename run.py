@@ -100,25 +100,6 @@ def kind(kind, page):
     )
 
 
-@app.route('/kind/<string:kind>/sub/<string:subkind_slug>.html', defaults={'page': 1})
-@app.route('/kind/<string:kind>/sub/<string:subkind_slug>/<int:page>.html')
-def sub_kind(kind, subkind_slug, page):
-    subkind = sluggify_subkind(subkind_slug, to_slug=False)
-    kind_pages = [p for p in pages if kind in p.meta.get('kind', [])]
-    subkind_pages = [p for p in kind_pages if subkind in p.meta.get('subkind', [])]
-
-    return paged_response(
-        page=page,
-        template='subkind.html',
-        pages=subkind_pages,
-        kwargs_to_send={
-            'kind': kind,
-            'subkind': subkind,
-            'subkind_slug': subkind_slug,
-        }
-    )
-
-
 @app.route('/year/<int:year>.html', defaults={'page': 1})
 @app.route('/year/<int:year>/<int:page>.html')
 def year(year, page):

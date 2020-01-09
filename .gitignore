@@ -1,7 +1,4 @@
 __pycache__
 */.DS_Store
 build/
-build_test/
-pages/
 stage/
-prepages/
