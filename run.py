@@ -12,6 +12,11 @@ from flask_frozen import Freezer
 import constants
 
 
+URLS = [
+    "www.hne.golf",
+    "hne.golf",
+]
+
 FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
 FREEZER_DESTINATION_IGNORE = ['.git*']
@@ -217,6 +222,18 @@ app.jinja_env.globals['now'] = datetime.datetime.utcnow
 
 
 ################################################################################
+# CNAME
+################################################################################
+def write_cname():
+    cname_path = Path(__file__).parent.joinpath('build', 'CNAME')
+
+    if cname_path.exists():
+        cname_path.unlink()
+    
+    cname_path.touch()
+    cname_path.write_text("\n".join(URLS))
+
+################################################################################
 # Run
 ################################################################################
 if __name__ == '__main__':
@@ -232,5 +249,6 @@ if __name__ == '__main__':
 
     if args.build:
         freezer.freeze()
+        write_cname()
     else:
         app.run(port=8000)
