@@ -1,7 +1,7 @@
 title: Quantifying hierarchy and dynamics in US faculty hiring and retention
 description: a paper describing the structure of academia
 date: 2022-09-21
-tags: [social science, networks, academia]
+tags: [papers, social science, academia]
 
 [link](https://www.nature.com/articles/s41586-022-05222-x).
 
