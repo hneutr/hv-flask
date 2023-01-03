@@ -17,11 +17,9 @@ python run.py --build
 
 # commit the changes
 cd $HNEGOLF_BUILD_DIR
-gptd
+git add .
+export COMMIT_MESSAGE_DATE_STRING=$(date)
+git commit -m "$COMMIT_MESSAGE_DATE_STRING - site update"
+git push
 
 cd $PWD
-# git add .
-# export COMMIT_MESSAGE_DATE_STRING=$(date)
-# git commit -m "$COMMIT_MESSAGE_DATE_STRING - site update"
-# git push
-# cd ..
