@@ -5,3 +5,4 @@ build/
 stage/
 env
 subparts/networks
+.python-version

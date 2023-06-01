@@ -4,6 +4,8 @@ kind: words
 tags: [short]
 description: Originally Written 2014/07/09
 
+---
+
 A man drinks beer on a porch and watches a sunset. The sun melts into water and he stays. A moon hangs, and he sees the stars. A white dusk settles, and he is there. 
 
 Some time passes, and he is there while the moon suns. In golden light he thinks of things that come to mind for a while. The moon glows. 

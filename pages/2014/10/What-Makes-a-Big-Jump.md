@@ -2,6 +2,8 @@ title: System Jumping
 tags: [questions]
 date: 2014-10-14
 
+---
+
 I recently read a book called [Intuition Pumps and Other Tools for Thinking](http://books.wwnorton.com/books/detail.aspx?id=4294978673) by Daniel C. Dennett. I found it quite thought-provoking. One of the ideas Dennett brings to the fore is joots'ing: jumping out of the system, a phrase coined by Doug Hofstadter (the author of _Gödel, Escher, Bach: An Eternal Golden Braid_) meaning something like 'going meta': recontextualizing a problem, generating a new perspective.  
 
 ---

@@ -4,6 +4,8 @@ kind: projects
 tags: [computing]
 description: Finally, a place all my own!
 
+---
+
 After a long period of inactivity - which, I'm sure, had everyone on edge - I finally got back around to my working on my website. Rather than write more content (the hard part) I rewrote the site from scratch (the easier part).
 
 The original site was built using [Jekyll](http://jekyllrb.com/), a static website generator, and [Hyde](http://hyde.getpoole.com/), an open source theme for Jekyll. Fortunately, I claim zero responsibility for that terrible pun.

@@ -3,6 +3,8 @@ description: Favorite Music of 2020 (in alphabetical order)
 date: 2021-01-01
 tags: [year-end, music]
 
+---
+
 [link](https://open.spotify.com/playlist/3kKCeeEKispq5B6I5cfIxR?si=GyDja7eRRUK8NaBP362uXQ)
 
 <br>

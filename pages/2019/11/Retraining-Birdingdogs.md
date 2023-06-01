@@ -3,5 +3,7 @@ kind: words
 title: Retraining Birdingdogs
 tags: [fiction]
 url_path: Retraining-Birdingdogs
-file_path: /Users/hne/Documents/text/written/fiction/20191103-retraining_birdingdogs/text.md
+file_path: /Users/hne/Documents/text/written/fiction/retraining-birdingdogs/text.md
 independent: 1
+
+---

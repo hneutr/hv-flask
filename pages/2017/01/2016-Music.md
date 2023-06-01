@@ -3,6 +3,8 @@ description: Favorite Albums of 2016 (in alphabetical order)
 date: 2017-01-01
 tags: [year-end, music]
 
+---
+
 [Playlist link](https://open.spotify.com/playlist/3rnjgURVFoEUumbKbBlhh4?si=670nRhxoRR2TeNcrgWBHGQ)
 
 <br>

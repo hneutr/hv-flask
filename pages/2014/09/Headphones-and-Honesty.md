@@ -2,6 +2,8 @@ title: Headphones and Honesty
 tags: [sound]
 date: 2014-09-14
 
+---
+
 Putting on a pair of electric earmuffs changes your perception in weird and "unnatural" ways. 
 
 They uniquely offer control over the sonic environment. You can control the input to your two ears independently, and without any cause beyond 'the soundsource dictated to'. 

@@ -1,6 +1,8 @@
 title: Want and the Limits of Time
 date: 2014-08-29
 
+---
+
 My time seems to speed by faster and faster. I go to bed with _more_ to do tomorrow, a feeling unrelated to how much I've done and related entirely to how much I want to do. This is a new phenomenon for me, one I've only noticed in the past year and one becoming  steadily more pronounced. 
 
 Though I have some guesses, I don't really know what the cause is and don't plan to spend much time searching. There are more productive things to do than assign blame to an inanimate and nonnegotiable force.

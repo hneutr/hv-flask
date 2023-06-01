@@ -3,6 +3,8 @@ description: Favorite Music of 2017 (in alphabetical order)
 date: 2018-01-01
 tags: [year-end, music]
 
+---
+
 [Playlist link](https://open.spotify.com/playlist/0ZmqKlZhnAlaN4ZVnvTbjg?si=ClIhFMplRbie3hKKd6_4PQ)
 
 <br>

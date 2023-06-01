@@ -4,6 +4,8 @@ date: 2015-08-18
 kind: words
 tags: [verse]
 
+---
+
 <p class="verse-top">From side to side, cradled in limbic</p>
 <p class="verse-mid"> Untime, a midpoint in some non-line, an</p>
 <p class="verse-bot">Ocean half sketched, dawn in silence.</p>

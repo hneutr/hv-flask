@@ -3,6 +3,8 @@ description: Favorite Books read in 2021 (in alphabetical order)
 date: 2023-01-01
 tags: [year-end, books]
 
+---
+
 - Brandon Sanderson — The Bands of Mourning
 - Brandon Sanderson — The Lost Metal
 - Gabriel Garcia Marquez — Love in the Time of Cholera

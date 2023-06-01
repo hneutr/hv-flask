@@ -2,6 +2,8 @@ title: The Case for Groups
 tags: [organization]
 date: 2014-09-08
 
+---
+
 I’m not satisfied with my computer’s file system organization. 
 
 Right now there are two independent (but overlapping) ways to organize content:

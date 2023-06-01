@@ -3,6 +3,8 @@ description: Favorite Music of 2018 (in alphabetical order)
 date: 2019-01-01
 tags: [year-end, music]
 
+---
+
 [Playlist link](https://open.spotify.com/playlist/6uCaUx28xOGjQNRoNumDED?si=DxZGegrBQAqaW8-Ace0Xegkl)
 
 <br>

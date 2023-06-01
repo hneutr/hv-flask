@@ -3,6 +3,8 @@ description: Favorite Albums of 2014 (alphabetically)
 date: 2015-01-02
 tags: [year-end, music]
 
+---
+
 [Playlist link](https://open.spotify.com/playlist/7sY7Ojb5NWlY1yXYsixisw?si=nXsE1muzTnSutLCRguzTAw)
 
 <br>
