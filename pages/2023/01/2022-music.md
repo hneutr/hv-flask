@@ -1,5 +1,5 @@
 title: 2022 Music
-description: Favorite Music of 2021 (in alphabetical order)
+description: Favorite Music of 2022 (in alphabetical order)
 date: 2023-01-01
 tags: [year-end, music]
 

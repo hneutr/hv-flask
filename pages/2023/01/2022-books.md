@@ -1,5 +1,5 @@
 title: 2022 Books
-description: Favorite Books read in 2021 (in alphabetical order)
+description: Favorite Books read in 2022 (in alphabetical order)
 date: 2023-01-01
 tags: [year-end, books]
 
