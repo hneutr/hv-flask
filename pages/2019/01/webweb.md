@@ -1,7 +1,7 @@
 title: webweb
 description: a simple way to create, share, and interact with network visualizations
 date: 2019-01-30
-kind: projects
+kind: papers
 tags: [networks, visualizations, software, python]
 
 ---

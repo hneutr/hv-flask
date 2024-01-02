@@ -1,6 +1,7 @@
 title: Labor advantages drive the greater productivity of faculty at elite universities
 description: a paper describing laber inequalities in academia
 date: 2022-11-18
+kind: papers
 tags: [papers, social science, networks, academia]
 
 ---

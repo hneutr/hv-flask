@@ -20,7 +20,7 @@ URLS = [
 FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
 FREEZER_DESTINATION_IGNORE = ['.git*']
-PER_PAGE = 5
+PER_PAGE = 10
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -193,7 +193,7 @@ def notfound():
 # Filters/Miscellaneous
 ################################################################################
 @app.template_filter()
-def formatdate(value, format='%Y/%m/%d'):
+def formatdate(value, format='%Y%m%d'):
     """convert a datetime to a different format."""
     return value.strftime(format)
 

@@ -1,8 +1,8 @@
 title: Device-agnostic Wi-Fi fingerprint positioning for consumer applications
 description: A paper outlining an indoor positioning system I co-developed
 date: 2015-08-30
-kind: projects
-tags: [wifi, mobile, machine-learning]
+kind: papers
+tags: [papers, wifi, mobile, machine-learning]
 
 ---
 

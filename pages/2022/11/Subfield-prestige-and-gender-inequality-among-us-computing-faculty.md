@@ -1,6 +1,7 @@
 title: Subfield prestige and gender inequality among US computing faculty
 description: a paper inequality in computer science subfields
 date: 2022-11-22
+kind: papers
 tags: [papers, social science, academia]
 
 ---

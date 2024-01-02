@@ -233,13 +233,14 @@ a:hover {
 .page-intro-header {
     font-size: 2.5em;
     font-weight: var(--font-weight-light);
-    margin: 1.5rem var(--content-margin);
+    margin: 1.5rem var(--content-margin) 0 var(--content-margin);
 }
 
-.page-intro-sutitle {
+.page-intro-subtitle {
     margin: 0;
     font-weight: var(--font-weight-light);
     font-size: 1em;
+    margin-top: 0 !important;
     margin-bottom: 1.5em;
 }
 
@@ -263,9 +264,14 @@ a:hover {
     margin: .5rem auto;
 }
 
-.triple-split.about {
-    margin: var(--content-margin);
+hr.divider {
+    width: 50%;
+    margin: 0 auto;
+}
 
+#about-split {
+    margin-top: var(--content-margin);
+    margin-bottom: 2.5rem;
 }
 /*******************************************************************************
  * stub
@@ -276,7 +282,8 @@ a:hover {
 
 .stub-hr {
     width: 10%;
-    margin: 2.5rem auto;
+    /* margin: 2.5rem auto; */
+    margin: 1.5rem auto;
 }
 
 .stub-header {
@@ -351,6 +358,11 @@ p.verse-last {
 p.verse-mid,
 p.verse-bot {
     margin-top: 0;
+}
+
+p.centered {
+    text-align: center;
+    text-indent: 0 !important;
 }
 
 /*******************************************************************************

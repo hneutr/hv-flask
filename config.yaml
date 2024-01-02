@@ -1,6 +1,5 @@
 kinds:
-    - playlists
-    - projects
     - words
+    - papers
 metas:
     - years
