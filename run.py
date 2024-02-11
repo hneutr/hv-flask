@@ -72,6 +72,7 @@ def index(page):
     recent = sorted(dated, key=lambda p: p.meta['date'], reverse=True)
     this_page = recent[(page - 1) * PER_PAGE:][:PER_PAGE]
 
+    print(url_for("static", filename=f"pdfs/thesis-defense.pdf"))
     return render_template('index.html', pages=this_page, pagination=pagination)
 
 ################################################################################
