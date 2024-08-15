@@ -3,8 +3,6 @@ kind: words
 title: >
   The Burnt: "chapter" 1
 tags: [fiction]
-url_path: The-Burnt
-file_path: /Users/hne/Documents/projects/hnegolf/content/The-Burnt-Chapter-One.md
-independent: 1
+link: /static/corpus/The-Burnt/1.pdf
 
 ---
