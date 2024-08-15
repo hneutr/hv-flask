@@ -19,6 +19,7 @@ URLS = [
 
 FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
+FREEZER_DESTINATION = ".build"
 FREEZER_DESTINATION_IGNORE = ['.git*']
 PER_PAGE = 50
 
@@ -186,7 +187,7 @@ app.jinja_env.globals['now'] = datetime.datetime.utcnow
 # CNAME
 ################################################################################
 def write_cname():
-    cname_path = Path(__file__).parent.joinpath('build', 'CNAME')
+    cname_path = Path(__file__).parent.joinpath('.build', 'CNAME')
 
     if cname_path.exists():
         cname_path.unlink()

@@ -1,7 +1,8 @@
 export START_DIR=$PWD
-export HNEGOLF_DIR=/Users/hne/Documents/projects/hnegolf
-export HNEGOLF_BUILD_DIR=$HNEGOLF_DIR/build
-export HNEGOLF_CV_PATH=$HNEGOLF_DIR/templates/cv.html
+
+export GOLF_ROOT=$HOME/lib/golf
+export GOLF_BUILD_DIR=$GOLF_ROOT/.build
+export GOLF_CV_PATH=$GOLF_ROOT/templates/cv.html
 
 export RESUMATOR_DIR=/Users/hne/Documents/projects/resumator
 export RESUMATOR_CV_PATH=$RESUMATOR_DIR/generated.html
@@ -9,17 +10,17 @@ export RESUMATOR_CV_PATH=$RESUMATOR_DIR/generated.html
 # generate the cv
 cd $RESUMATOR_DIR
 python run.py
-cp $RESUMATOR_CV_PATH $HNEGOLF_CV_PATH
+cp $RESUMATOR_CV_PATH $GOLF_CV_PATH
 
 # build the site
-cd $HNEGOLF_DIR
+cd $GOLF_ROOT
 python run.py --build
 
 # commit the changes
-cd $HNEGOLF_BUILD_DIR
+cd $GOLF_BUILD_DIR
 git add .
 export COMMIT_MESSAGE_DATE_STRING=$(date)
-git commit -m "$COMMIT_MESSAGE_DATE_STRING - site update"
+git commit -m "$COMMIT_MESSAGE_DATE_STRING update"
 git push
 
-cd $PWD
+cd $START_DIR
