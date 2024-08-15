@@ -20,7 +20,7 @@ URLS = [
 FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
 FREEZER_DESTINATION_IGNORE = ['.git*']
-PER_PAGE = 10
+PER_PAGE = 50
 
 app = Flask(__name__)
 app.config.from_object(__name__)
