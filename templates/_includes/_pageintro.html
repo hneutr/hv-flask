@@ -6,9 +6,7 @@
     {% endif %}
 
     <a class="unstyled-link" href=
-        {% if page.independent %}
-            "{{ url_for("independent_page", kind=page.kind, name=page.url_path) }}"
-        {% elif page.link %}
+        {% if page.link %}
             "{{ page.link }}"
         {% else %}
             "{{ url_for("page", path=page.path) }}"

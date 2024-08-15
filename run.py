@@ -82,14 +82,6 @@ def index(page):
 def page(path):
     page = pages.get_or_404(path)
 
-    if page.meta.get('independent', False):
-        kind = page.meta.get('kind', '')
-        page_url = page.meta.get('url_path', '')
-
-        full_page_url = url_for(kind + '/' + page_url + '.html')
-
-        redirect(full_page_url)
-
     return render_template('page.html', page=page)
 
 
@@ -129,38 +121,6 @@ def paged_response(page, template, kwargs_to_send={}, pages=[]):
     kwargs_to_send['pagination'] = pagination
 
     return render_template(template, **kwargs_to_send)
-
-
-@app.route('/kind/<string:kind>/<string:name>.html')
-def independent_page(kind, name):
-    matching_pages = [p for p in pages if kind in p.meta.get('kind', [])]
-    matching_pages = [p for p in pages if p.meta.get('url_path', '') == name]
-
-    if matching_pages:
-        page = matching_pages.pop()
-
-        content_path = Path(page.meta.get('file_path', ''))
-
-        if content_path.exists():
-            raw_text = content_path.read_text()
-
-            if raw_text:
-                # strip the title if it is the first line
-                lines = raw_text.split("\n")
-                first_line = lines[0].strip()
-                title = page.meta.get('title')
-                for surround_character in ['"', '__', '_', '*', '**', '']:
-                    if first_line == surround_character + title + surround_character:
-                        lines = lines[1:]
-                        break
-
-                return render_template(
-                    'independent_page.html',
-                    page=page,
-                    text=markdown.markdown("\n".join(lines))
-                )
-
-    return render_template('404.html')
 
 
 ################################################################################
