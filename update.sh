@@ -4,7 +4,7 @@ export GOLF_ROOT=$HOME/lib/golf
 export GOLF_BUILD_DIR=$GOLF_ROOT/.build
 export GOLF_CV_PATH=$GOLF_ROOT/templates/cv.html
 
-export RESUMATOR_DIR=/Users/hne/Documents/projects/resumator
+export RESUMATOR_DIR=$HOME/Documents/projects/resumator
 export RESUMATOR_CV_PATH=$RESUMATOR_DIR/generated.html
 
 # generate the cv

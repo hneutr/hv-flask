@@ -199,7 +199,7 @@ def write_cname():
 # Run
 ################################################################################
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='hnesite')
+    parser = argparse.ArgumentParser(description='hne.golf website')
 
     parser.add_argument(
         '-b', '--build',
