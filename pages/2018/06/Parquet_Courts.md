@@ -2,7 +2,6 @@ title: Parquet Courts
 description: Content Nausea, World War Four
 date: 2018-06-12
 kind: playlists
-subkind: artist mixes
 tags: [post-punk, rock, music]
 
 ---

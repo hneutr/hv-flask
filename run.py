@@ -19,8 +19,10 @@ URLS = [
 
 FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
+
 FREEZER_DESTINATION = ".build"
 FREEZER_DESTINATION_IGNORE = ['.git*']
+
 PER_PAGE = 50
 
 app = Flask(__name__)
@@ -73,7 +75,6 @@ def index(page):
     recent = sorted(dated, key=lambda p: p.meta['date'], reverse=True)
     this_page = recent[(page - 1) * PER_PAGE:][:PER_PAGE]
 
-    print(url_for("static", filename=f"pdfs/thesis-defense.pdf"))
     return render_template('index.html', pages=this_page, pagination=pagination)
 
 ################################################################################
@@ -82,7 +83,6 @@ def index(page):
 @app.route('/<path:path>/')
 def page(path):
     page = pages.get_or_404(path)
-
     return render_template('page.html', page=page)
 
 
@@ -137,11 +137,6 @@ def years():
 ################################################################################
 # Static Routes
 ################################################################################
-@app.route('/me.html')
-def me():
-    return render_template('about.html')
-
-
 @app.route('/cv.html')
 def cv():
     return render_template('cv.html')
@@ -158,14 +153,6 @@ def notfound():
 def formatdate(value, format='%Y%m%d'):
     """convert a datetime to a different format."""
     return value.strftime(format)
-
-
-@app.template_filter()
-def sluggify_subkind(subkind, to_slug=True):
-    if to_slug:
-        return subkind.replace(' ', '_')
-    else:
-        return subkind.replace('_', ' ')
 
 
 def url_for_other_page(page):

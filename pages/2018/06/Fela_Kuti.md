@@ -2,7 +2,6 @@ title: Fela Kuti
 description: My friend he no want die...
 date: 2018-06-12
 kind: playlists
-subkind: artist mixes
 tags: [afrobeat, music]
 
 ---

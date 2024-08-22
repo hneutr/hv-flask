@@ -7,14 +7,6 @@
 
 {% block intro %}
 <h1><a href="{{ url_for("kind", kind=kind) }}">{{ kind }}</a></h1>
-{% if subkinds %}
-<h3>
-{% for subkind in subkinds %}
-    <a class="subkind-link" href="{{ url_for("sub_kind", kind=kind, subkind_slug=subkind|sluggify_subkind)}}">{{subkind}}</a>
-    {% if not loop.last %},{% endif %}
-{% endfor %}
-</h3>
-{% endif %}
 {% endblock intro %}
 
 {% block content %}
